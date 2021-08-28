@@ -1,10 +1,10 @@
-import { INasaImageData, NasaSearchMediaType } from "types";
+import { INasaAsset, INasaAssetData, INasaSearchResponse, NasaSearchMediaType } from "types";
 import { config } from "config";
 import axios, { AxiosStatic } from "axios";
 
 export interface INasaService {
-    getAsset(id: string): Promise<INasaImageData | undefined>;
-    search(mediaTypes: NasaSearchMediaType[], textSearch: string): Promise<INasaImageData[] | undefined>;
+    getAsset(id: string): Promise<INasaAssetData | undefined>;
+    search(mediaTypes: NasaSearchMediaType[], textSearch: string): Promise<INasaAsset[] | undefined>;
 }
 
 export class NasaService implements INasaService {
@@ -12,21 +12,23 @@ export class NasaService implements INasaService {
         private readonly client: AxiosStatic
     ) { }
 
-    async search(mediaTypes: NasaSearchMediaType[], textSearch: string): Promise<INasaImageData[] | undefined> {
+    async search(mediaTypes: NasaSearchMediaType[], textSearch: string): Promise<INasaAsset[] | undefined> {
         try {
-            return await this.client.get(config.nasa.search, {
+            const response = await this.client.get(config.nasaEndpoints.search, {
                 params: {
                     "media_type": mediaTypes,
                     "q": textSearch
                 }
             });
+            return (response.data as INasaSearchResponse).collection.items;
+
         } catch (error) {
             console.error(error);
         }
     }
 
-    async getAsset(id: string): Promise<INasaImageData | undefined> {
-        const url = `${config.nasa.asset}/${id}`;
+    async getAsset(id: string): Promise<INasaAssetData | undefined> {
+        const url = `${config.nasaEndpoints.asset}/${id}`;
         try {
             return await this.client.get(url);
         } catch (error) {

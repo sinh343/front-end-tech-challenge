@@ -1,18 +1,17 @@
 import React from "react";
-import { ImageProps, INasaImageData } from "../../types";
+import { ImageProps } from "../../types";
 
 export interface IAssetTileProps {
-    image: ImageProps,
-    nasaImageData: INasaImageData,
+    imageProps?: ImageProps,
+    nasaImageId: string,
 }
 
-export const AssetTile = ({ image, nasaImageData }: IAssetTileProps): JSX.Element => {
+export const AssetTile = ({ imageProps, nasaImageId }: IAssetTileProps): JSX.Element => {
 
     const onClickHandler = () => {
-        window.location.pathname = `/asset/${nasaImageData.nasa_id}`
+        window.location.pathname = `/asset/${nasaImageId}`
     }
-
     return (
-        <img onClick={onClickHandler} {...image}></img>
+        <img onClick={onClickHandler} {...imageProps}></img>
     )
 }

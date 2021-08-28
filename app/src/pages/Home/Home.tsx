@@ -1,22 +1,27 @@
+import { config } from "config";
 import React from "react";
-import { AssetTile, IAssetTileProps } from "../../components/AssetTile/AssetTile";
+import { useAppSelector } from "store/hooks";
+import { ImageProps, INasaAsset, NasaRel } from "types";
+import { AssetTile } from "../../components/AssetTile/AssetTile";
 import { SearchSection } from "../../components/SearchSection/SearchSection";
+
+const createAssetTile = (nasaAsset: INasaAsset, i: number) => {
+    const previewImage = nasaAsset.links?.find(l => l.rel === NasaRel.PREVIEW)?.href ?? config.defaultPreviewImage;
+    const imageProps: ImageProps = {
+        src: previewImage,
+    }
+    return <AssetTile key={i} imageProps={imageProps} nasaImageId={nasaAsset.data.nasa_id} />
+}
 
 export const Home = () => {
 
-    const displayImages: IAssetTileProps[] = [
-        {
-            nasaImageData: { nasa_id: "as11-40-5874" },
-            image: { src: "https://via.placeholder.com/150" }
-        },
-
-    ];
-
+    const nasaImagesData = useAppSelector(s => s.nasa.images);
+    console.log(nasaImagesData.filter(img => !img.links));
     return (
         <div>
             <SearchSection />
             <div>
-                {displayImages.map((props, i) => <AssetTile key={i} {...props} />)}
+                {nasaImagesData.map(createAssetTile)}
             </div>
         </div>
     )

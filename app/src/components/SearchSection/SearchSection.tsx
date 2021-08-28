@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { nasaService } from "services/nasaService";
+import { useAppDispatch } from "store/hooks";
+import { updateImages } from "store/slices/nasa";
 import { NasaSearchMediaType } from "types";
 
 const serializeMediaTypes = (isImagesSelected: boolean, isAudioSelected: boolean): NasaSearchMediaType[] => {
@@ -11,7 +13,8 @@ const serializeMediaTypes = (isImagesSelected: boolean, isAudioSelected: boolean
 
 export const SearchSection = () => {
     const imagesCheckboxId = "imagesCheckbox";
-    const audioCheckboxId = "audioCheckbox"
+    const audioCheckboxId = "audioCheckbox";
+    const dispatch = useAppDispatch();
 
     const [searchString, setSearchString] = useState("");
     const [isImagesSelected, setIsImagesSelected] = useState(false);
@@ -19,13 +22,18 @@ export const SearchSection = () => {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const mediaTypes = serializeMediaTypes(isImagesSelected, isAudioSelected)
-        const response = await nasaService.search(mediaTypes, searchString);
-        // TODO: update app state with response in redux 
-    }
+        const mediaTypes = serializeMediaTypes(isImagesSelected, isAudioSelected);
+        const images = await nasaService.search(mediaTypes, searchString);
+        if (!images) {
+            //TODO: error handling page/information
+        } else {
+            dispatch(updateImages(images))
+        }
+    };
+
     return (
         <div>
-            <h1> NASA Search</h1>
+            <h1>NASA Search</h1>
             <form onSubmit={onSubmit}>
                 <input
                     value={searchString}
@@ -51,4 +59,4 @@ export const SearchSection = () => {
             </form>
         </div>
     );
-}
+};

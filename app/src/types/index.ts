@@ -13,7 +13,7 @@ export interface INasaLink {
 }
 
 export interface INasaAsset {
-    data: INasaAssetData;
+    data: INasaAssetData[];
     href: string;
     links?: INasaLink[] // not used for now so left any
 }

@@ -10,7 +10,7 @@ const createAssetTile = (nasaAsset: INasaAsset, i: number) => {
     const imageProps: ImageProps = {
         src: previewImage,
     }
-    return <AssetTile key={i} imageProps={imageProps} nasaImageId={nasaAsset.data.nasa_id} />
+    return <AssetTile key={i} imageProps={imageProps} nasaImageId={nasaAsset.data[0].nasa_id} />
 }
 
 export const Home = () => {

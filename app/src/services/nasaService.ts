@@ -1,6 +1,6 @@
 import { INasaImageData, NasaSearchMediaType } from "types";
 import { config } from "config";
-import { AxiosInstance } from "axios";
+import axios, { AxiosStatic } from "axios";
 
 export interface INasaService {
     getAsset(id: string): Promise<INasaImageData | undefined>;
@@ -9,7 +9,7 @@ export interface INasaService {
 
 export class NasaService implements INasaService {
     constructor(
-        private readonly client: AxiosInstance
+        private readonly client: AxiosStatic
     ) { }
 
     async search(mediaTypes: NasaSearchMediaType[], textSearch: string): Promise<INasaImageData[] | undefined> {
@@ -34,3 +34,5 @@ export class NasaService implements INasaService {
         }
     }
 }
+
+export const nasaService = new NasaService(axios)

@@ -6,23 +6,23 @@ import { AssetTile } from "../../components/AssetTile/AssetTile";
 import { SearchSection } from "../../components/SearchSection/SearchSection";
 
 const createAssetTile = (nasaAsset: INasaAsset, i: number) => {
-    const previewImage = nasaAsset.links?.find(l => l.rel === NasaRel.PREVIEW)?.href ?? config.defaultPreviewImage;
-    const imageProps: ImageProps = {
-        src: previewImage,
-    }
-    return <AssetTile key={i} imageProps={imageProps} nasaImageId={nasaAsset.data[0].nasa_id} />
+  const previewImage = nasaAsset.links?.find(l => l.rel === NasaRel.PREVIEW)?.href ?? config.defaultPreviewImage;
+  const imageProps: ImageProps = {
+    src: previewImage,
+  }
+  return <AssetTile key={i} imageProps={imageProps} nasaImageId={nasaAsset.data[0].nasa_id} />
 }
 
 export const Home = () => {
 
-    const nasaImagesData = useAppSelector(s => s.nasa.images);
-    console.log(nasaImagesData.filter(img => !img.links));
-    return (
-        <div>
-            <SearchSection />
-            <div>
-                {nasaImagesData.map(createAssetTile)}
-            </div>
-        </div>
-    )
+  const nasaImagesData = useAppSelector(s => s.nasa.images);
+  console.log(nasaImagesData.filter(img => !img.links));
+  return (
+    <div>
+      <SearchSection />
+      <div>
+        {nasaImagesData.map(createAssetTile)}
+      </div>
+    </div>
+  )
 }

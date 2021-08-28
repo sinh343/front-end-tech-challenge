@@ -2,8 +2,8 @@ import { config } from "config";
 import React from "react";
 import { useAppSelector } from "store/hooks";
 import { ImageProps, INasaAsset, NasaRel } from "types";
-import { AssetTile } from "../../components/AssetTile/AssetTile";
-import { SearchSection } from "../../components/SearchSection/SearchSection";
+import { AssetTile } from "../../components/AssetTile";
+import { SearchSection } from "../../components/SearchSection";
 
 const createAssetTile = (nasaAsset: INasaAsset, i: number) => {
   const previewImage = nasaAsset.links?.find(l => l.rel === NasaRel.PREVIEW)?.href ?? config.defaultPreviewImage;
@@ -16,7 +16,6 @@ const createAssetTile = (nasaAsset: INasaAsset, i: number) => {
 export const Home = () => {
 
   const nasaImagesData = useAppSelector(s => s.nasa.images);
-  console.log(nasaImagesData.filter(img => !img.links));
   return (
     <div>
       <SearchSection />

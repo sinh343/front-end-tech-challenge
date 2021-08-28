@@ -3,7 +3,9 @@ import type React from "react";
 export type ImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
 
 export interface INasaAssetData {
-  nasa_id: string
+  nasa_id: string,
+  description: string,
+  title: string
 }
 
 export interface INasaLink {
@@ -20,7 +22,8 @@ export interface INasaAsset {
 
 export enum NasaSearchMediaType {
   IMAGE = "image",
-  AUDIO = "audio"
+  AUDIO = "audio",
+  VIDEO = "video"
 }
 
 export enum NasaRel {

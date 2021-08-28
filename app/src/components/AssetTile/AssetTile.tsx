@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { ImageProps } from "../../types";
 
 export interface IAssetTileProps {
@@ -7,9 +8,9 @@ export interface IAssetTileProps {
 }
 
 export const AssetTile = ({ imageProps, nasaImageId }: IAssetTileProps): JSX.Element => {
-
+  const history = useHistory();
   const onClickHandler = () => {
-    window.location.pathname = `/asset/${nasaImageId}`
+    history.push(`/asset/${nasaImageId}`);
   }
   return (
     <img onClick={onClickHandler} {...imageProps}></img>

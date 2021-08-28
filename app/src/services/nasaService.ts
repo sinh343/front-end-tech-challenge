@@ -14,14 +14,10 @@ export class NasaService implements INasaService {
 
     async search(mediaTypes: NasaSearchMediaType[], textSearch: string): Promise<INasaAsset[] | undefined> {
         try {
-            const response = await this.client.get(config.nasaEndpoints.search, {
-                params: {
-                    "media_type": mediaTypes,
-                    "q": textSearch
-                }
-            });
+            const mediaTypesString = mediaTypes.length ? `media_type=${mediaTypes.join()}&` : "";
+            const qs = `${mediaTypesString}q=${textSearch}`;
+            const response = await this.client.get(`${config.nasaEndpoints.search}?${qs}`);
             return (response.data as INasaSearchResponse).collection.items;
-
         } catch (error) {
             console.error(error);
         }
@@ -37,4 +33,4 @@ export class NasaService implements INasaService {
     }
 }
 
-export const nasaService = new NasaService(axios)
+export const nasaService = new NasaService(axios);

@@ -1,4 +1,8 @@
-import { FormControl, FormGroup, IconButton, InputAdornment, OutlinedInput } from "@material-ui/core";
+import FormGroup from '@material-ui/core/FormGroup';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import SearchIcon from '@material-ui/icons/Search';
 import { SearchCheckbox } from "components/SearchCheckbox";
 import React, { useState } from "react";
@@ -39,32 +43,42 @@ export const SearchSection = () => {
   };
 
   return (
-    <div>
-      <h1>NASA Search</h1>
-      <FormControl >
-        <OutlinedInput
-          autoFocus
-          value={searchString}
-          onChange={e => setSearchString(e.target.value)}
-          onKeyUp={onSubmit}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="Search for assets"
-                onClick={fetchPreviewIamges}
-                onMouseDown={e => e.preventDefault()}
-              >
-                <SearchIcon fontSize="large" />
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-        <FormGroup row>
-          <SearchCheckbox label="Images" checked={isImagesSelected} onChange={e => setIsImagesSelected(!isImagesSelected)} />
-          <SearchCheckbox label="Audio" checked={isAudioSelected} onChange={e => setIsAudioSelected(!isAudioSelected)} />
-          <SearchCheckbox label="Videos" checked={isVideoSelected} onChange={e => setIsVideoSelected(!isVideoSelected)} />
-        </FormGroup>
-      </FormControl>
-    </div>
+    <Grid container>
+      <Grid container item xs={12} justifyContent="center">
+        <h1>NASA Search</h1>
+      </Grid>
+      <Grid container justifyContent="center">
+        <Grid item xs={12}>
+          <OutlinedInput
+            fullWidth
+            autoFocus
+            value={searchString}
+            onChange={e => setSearchString(e.target.value)}
+            onKeyUp={onSubmit}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="Search for assets"
+                  onClick={fetchPreviewIamges}
+                  onMouseDown={e => e.preventDefault()}
+                >
+                  <SearchIcon fontSize="large" />
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </Grid>
+        <Grid item >
+          <FormGroup row>
+            <SearchCheckbox label="Images" checked={isImagesSelected} onChange={e => setIsImagesSelected(!isImagesSelected)} />
+            <SearchCheckbox label="Audio" checked={isAudioSelected} onChange={e => setIsAudioSelected(!isAudioSelected)} />
+            <SearchCheckbox label="Videos" checked={isVideoSelected} onChange={e => setIsVideoSelected(!isVideoSelected)} />
+          </FormGroup>
+        </Grid>
+
+
+
+      </Grid>
+    </Grid>
   );
 };

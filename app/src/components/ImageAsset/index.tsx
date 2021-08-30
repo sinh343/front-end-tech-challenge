@@ -1,3 +1,5 @@
+import { Grid } from "@material-ui/core";
+import { useStyles } from "./styles";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { nasaService } from "services/nasaService";
@@ -14,6 +16,7 @@ export const ImageAsset = () => {
   const { id: nasaId } = useParams<IAssetUrlParams>();
   const [assetData, setAssetData] = useState<any>({});
   const [assetMetadata, setAssetMetaData] = useState<any>({});
+  const classes = useStyles();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,15 +40,17 @@ export const ImageAsset = () => {
   const imageSrc = assetData?.items ? getFirstUseableImage(assetData?.items) : undefined;
 
   return (
-    <div>
-      <div>
+    <Grid container justifyContent="center">
+      <Grid container item xs={10} justifyContent="center">
         <h1>{title}</h1>
+      </Grid>
+      <Grid container item xs={10} justifyContent="center">
         <p>{description}</p>
-      </div>
+      </Grid>
 
-      <div>
-        <img src={imageSrc} alt={title} />
-      </div>
-    </div>
+      <Grid item>
+        <img src={imageSrc} alt={title} className={classes.img} />
+      </Grid>
+    </Grid >
   )
 }

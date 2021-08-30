@@ -4,6 +4,7 @@ import { config } from "config";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { ImageProps, INasaAsset, NasaRel } from "../../types";
+import { useStyles } from "./styles";
 
 export interface IAssetTileProps {
   imageProps?: ImageProps,
@@ -14,7 +15,7 @@ export interface IAssetTileProps {
 export const AssetTile = (nasaAsset: INasaAsset) => {
   const previewImage = nasaAsset.links?.find(l => l.rel === NasaRel.PREVIEW)?.href ?? config.defaultPreviewImage;
   const { title = "", nasa_id: nasaImageId } = nasaAsset.data?.[0];
-
+  const classes = useStyles();
   const history = useHistory();
   const onClickHandler = () => {
     history.push(`/asset/${nasaImageId}`);
@@ -22,7 +23,7 @@ export const AssetTile = (nasaAsset: INasaAsset) => {
 
   return (
     <ImageListItem >
-      <img src={previewImage} alt={title} />
+      <img src={previewImage} alt={title} className={classes.img} onClick={onClickHandler} onMouseDown={e => e.preventDefault()} />
       <ImageListItemBar
         title={title}
         actionIcon={

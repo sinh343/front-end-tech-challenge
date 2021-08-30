@@ -27,7 +27,7 @@ export const AssetTile = (nasaAsset: INasaAsset) => {
         title={title}
         actionIcon={
           <IconButton aria-label={`info about ${title}`} onClick={onClickHandler} onMouseDown={e => e.preventDefault()}>
-            <InfoIcon />
+            <InfoIcon style={{ color: "white" }} />
           </IconButton>
         }
       />

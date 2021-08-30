@@ -54,7 +54,7 @@ export const SearchSection = () => {
                 onClick={fetchPreviewIamges}
                 onMouseDown={e => e.preventDefault()}
               >
-                <SearchIcon />
+                <SearchIcon fontSize="large" />
               </IconButton>
             </InputAdornment>
           }

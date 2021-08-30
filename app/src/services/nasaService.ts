@@ -1,6 +1,6 @@
-import { INasaAsset, INasaAssetData, INasaSearchResponse, NasaSearchMediaType } from "types";
-import { config } from "config";
 import axios, { AxiosStatic } from "axios";
+import { config } from "config";
+import { INasaAsset, INasaAssetData, INasaSearchResponse, NasaSearchMediaType } from "types";
 
 export interface INasaService {
   getAsset(id: string): Promise<INasaAssetData | undefined>;

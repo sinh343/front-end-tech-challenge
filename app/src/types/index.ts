@@ -42,3 +42,7 @@ export interface INasaSearchResponse {
     metadata: { total_hits: number }
   }
 }
+
+export interface IAssetUrlParams {
+  id: string;
+}

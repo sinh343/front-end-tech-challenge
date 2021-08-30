@@ -9,6 +9,7 @@ const createAssetTile = (nasaAsset: INasaAsset, i: number) => {
   const previewImage = nasaAsset.links?.find(l => l.rel === NasaRel.PREVIEW)?.href ?? config.defaultPreviewImage;
   const imageProps: ImageProps = {
     src: previewImage,
+    alt: nasaAsset.data[0].title
   }
   return <AssetTile key={i} imageProps={imageProps} nasaImageId={nasaAsset.data[0].nasa_id} />
 }

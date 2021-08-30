@@ -23,6 +23,16 @@ export class NasaService implements INasaService {
     }
   }
 
+  async getAssetMediaType(id: string): Promise<NasaSearchMediaType | undefined> {
+    try {
+      const qs = `nasa_id=${id}`;
+      const response = await this.client.get(`${config.nasaEndpoints.search}?${qs}`);
+      return (response.data as any).collection.items[0].data[0].media_type;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async getAsset(id: string): Promise<INasaAssetData | undefined> {
     const url = `${config.nasaEndpoints.asset}/${id}`;
     try {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { nasaService } from "services/nasaService";
+import { IAssetUrlParams } from "types";
 
 const getFirstUseableImage = (items: any[]): string => {
   return items
@@ -9,7 +10,8 @@ const getFirstUseableImage = (items: any[]): string => {
 }
 
 export const ImageAsset = () => {
-  const { id: nasaId } = useParams<{ id: string }>();
+
+  const { id: nasaId } = useParams<IAssetUrlParams>();
   const [assetData, setAssetData] = useState<any>({});
   const [assetMetadata, setAssetMetaData] = useState<any>({});
 
@@ -42,7 +44,7 @@ export const ImageAsset = () => {
       </div>
 
       <div>
-        <img src={imageSrc} />
+        <img src={imageSrc} alt={title} />
       </div>
     </div>
   )

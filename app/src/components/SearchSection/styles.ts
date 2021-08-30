@@ -1,6 +1,5 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { CSSProperties } from "@material-ui/core/styles/withStyles";
-import { colors } from "globalCssVariables/colors";
 
 const styles = (t: Theme) => ({
   title: {

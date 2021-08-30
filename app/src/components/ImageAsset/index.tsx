@@ -48,7 +48,7 @@ export const ImageAsset = () => {
         <Typography variant="body1" className={classes.description}>{description}</Typography>
       </Grid>
 
-      <Grid container item justifyContent="center" >
+      <Grid container item sm={10} justifyContent="center" >
         <img src={imageSrc} alt={title} className={classes.img} />
       </Grid>
     </Grid >

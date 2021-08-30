@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { useStyles } from "./styles";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -41,14 +41,14 @@ export const ImageAsset = () => {
 
   return (
     <Grid container justifyContent="center">
-      <Grid container item xs={10} justifyContent="center">
-        <h1>{title}</h1>
+      <Grid container item xs={8} justifyContent="center">
+        <Typography variant="h3" component="h1" className={classes.title}>{title}</Typography>
       </Grid>
-      <Grid container item xs={10} justifyContent="center">
-        <p>{description}</p>
+      <Grid container item xs={8} justifyContent="center">
+        <Typography variant="body1" className={classes.description}>{description}</Typography>
       </Grid>
 
-      <Grid item>
+      <Grid container item justifyContent="center" >
         <img src={imageSrc} alt={title} className={classes.img} />
       </Grid>
     </Grid >

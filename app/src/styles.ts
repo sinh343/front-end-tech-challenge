@@ -1,19 +1,11 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import { CSSProperties } from "@material-ui/core/styles/withStyles";
-
-export const CssConstants = {
-  imageHeight: 300
-}
-
+import { colors } from "globalCssVariables/colors";
 const styles = (t: Theme) => ({
-  img: {
-    objectFit: "cover",
-    width: "100%",
-    height: "100%",
-    maxHeight: `${CssConstants.imageHeight}px`,
-    "&:hover": {
-      cursor: "pointer"
-    } as CSSProperties
+  container: {
+    backgroundColor: colors.nasaGray,
+    minHeight: "100vh",
+    color: colors.white
   } as CSSProperties
 })
 

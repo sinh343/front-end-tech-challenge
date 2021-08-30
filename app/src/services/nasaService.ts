@@ -23,10 +23,33 @@ export class NasaService implements INasaService {
     }
   }
 
+  async getAssetMediaType(id: string): Promise<NasaSearchMediaType | undefined> {
+    try {
+      const qs = `nasa_id=${id}`;
+      const response = await this.client.get(`${config.nasaEndpoints.search}?${qs}`);
+      return (response.data as any).collection.items[0].data[0].media_type;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async getAsset(id: string): Promise<INasaAssetData | undefined> {
     const url = `${config.nasaEndpoints.asset}/${id}`;
     try {
-      return await this.client.get(url);
+      const response = await this.client.get(url);
+      return response.data.collection;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async getAssetMetadata(id: string, type = NasaSearchMediaType.IMAGE): Promise<INasaAssetData | undefined> {
+    console.log(type.valueOf());
+    const url = `${config.nasaEndpoints.base}/${type}/${id}/metadata.json`;
+    console.log(url);
+    try {
+      const response = await this.client.get(url);
+      return response.data;
     } catch (error) {
       console.error(error);
     }

@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { INasaAsset, INasaAssetData } from "types";
+import { INasaAsset } from "types";
 
 interface INasaState {
-  images: INasaAsset[]
+  images: INasaAsset[],
 }
 
 export const nasaSlice = createSlice({
@@ -13,7 +13,7 @@ export const nasaSlice = createSlice({
   reducers: {
     updateImages: (state, action: PayloadAction<INasaAsset[]>) => {
       state.images = action.payload;
-    }
+    },
   }
 })
 

@@ -1,6 +1,6 @@
 import './App.css';
-import { Home } from 'pages/Home/Home';
-import { AssetPage } from './pages/AssetPage/AssetPage';
+import { Home } from 'pages/Home';
+import { AssetPage } from './pages/AssetPage';
 
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import { NotFoundPage } from 'pages/NotFoundPage';

@@ -13,6 +13,6 @@ export const AssetTile = ({ imageProps, nasaImageId }: IAssetTileProps): JSX.Ele
     history.push(`/asset/${nasaImageId}`);
   }
   return (
-    <img onClick={onClickHandler} {...imageProps}></img>
+    <img onClick={onClickHandler} alt={imageProps?.alt} {...imageProps}></img>
   )
 }

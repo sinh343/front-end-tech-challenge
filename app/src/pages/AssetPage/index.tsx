@@ -1,11 +1,9 @@
-import React from "react";
 import { ImageAsset } from "components/ImageAsset";
-import { useEffect } from "react";
-import { useState } from "react";
-import { IAssetUrlParams, NasaSearchMediaType } from "types";
 import { Loading } from "components/Loading";
-import { nasaService } from "services/nasaService";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { nasaService } from "services/nasaService";
+import { IAssetUrlParams, NasaSearchMediaType } from "types";
 
 const AudioAsset = () => <div> audio asset not implemented</div>;
 
@@ -20,8 +18,9 @@ export const AssetPage = () => {
 
   useEffect(() => {
     (async () => {
+      if (assetMediaType) return; // avoid unneccesary requests
+
       const mediaType = await nasaService.getAssetMediaType(id);
-      console.log(mediaType);
       if (!mediaType) setIsBadResponse(true);
       setAssetMediaType(mediaType);
     })()

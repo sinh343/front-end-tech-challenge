@@ -44,9 +44,7 @@ export class NasaService implements INasaService {
   }
 
   async getAssetMetadata(id: string, type = NasaSearchMediaType.IMAGE): Promise<INasaAssetData | undefined> {
-    console.log(type.valueOf());
     const url = `${config.nasaEndpoints.base}/${type}/${id}/metadata.json`;
-    console.log(url);
     try {
       const response = await this.client.get(url);
       return response.data;

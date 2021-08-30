@@ -18,8 +18,9 @@ export const AssetPage = () => {
 
   useEffect(() => {
     (async () => {
+      if (assetMediaType) return; // avoid unneccesary requests
+
       const mediaType = await nasaService.getAssetMediaType(id);
-      console.log(mediaType);
       if (!mediaType) setIsBadResponse(true);
       setAssetMediaType(mediaType);
     })()
